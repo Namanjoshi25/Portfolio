@@ -19,6 +19,9 @@ export const DATA = {
     "Node.js",
     "MongoDB",
     "TailwindCss",
+    "PostgreSql",
+    "Prisma",
+    "Docker",
     "Java",
 
   ],
@@ -76,6 +79,36 @@ export const DATA = {
 
   ],
   projects: [
+    {
+      title: "Learning management system",
+      href: "https://learning-management-system-pi-liard.vercel.app/",
+      dates: "Dec 2024 - Jan 2025",
+      active: true,
+      description:
+      "Developed an LMS project using Next.js for the frontend and PostgreSQL for the database This project likely includes features like user authentication, course creation and management, and the abilityto search and filter courses dynamically",
+      technologies: [
+        "Next.js",
+        "Zod",
+        "Prisma",
+        "NextAuth",
+        "Typescript",
+        "PostgreSql",
+        "NeonDB",
+        "TailwindCSS",
+        "ShadCn",
+
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://learning-management-system-pi-liard.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
+    },
     {
       title: "Neuzy",
       href: "https://neuzy-frontend.onrender.com",
