@@ -78,6 +78,16 @@ export const DATA = {
     },
 
   ],
+  experience: [
+    {
+      company: "AISolv",
+      href: "#",
+      title: "Full-Stack AI Developer",
+      logoUrl: "/buildspace.jpg",
+      start: "Aug 2025",
+      end: "Present",
+    },
+  ],
   projects: [
     {
       title: "Learning management system",
