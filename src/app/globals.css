@@ -142,3 +142,44 @@ code[data-line-numbers-max-digits="2"] > [data-line]::before {
 code[data-line-numbers-max-digits="3"] > [data-line]::before {
   width: 3rem;
 }
+
+@keyframes glow-sweep {
+  0% {
+    transform: translateX(-180%) skewX(-18deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translateX(280%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+.glow-sweep {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.glow-sweep::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  width: 45%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 35%,
+    rgba(134, 239, 172, 0.7) 50%,
+    rgba(255, 255, 255, 0.12) 65%,
+    transparent 100%
+  );
+  filter: blur(10px);
+  pointer-events: none;
+  animation: glow-sweep 2.8s ease-in-out infinite;
+}

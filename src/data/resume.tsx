@@ -7,23 +7,48 @@ export const DATA = {
   url: "http://localhost:3000/",
   location: "Delhi ,India",
   description:
-  "As a passionate and driven B.Tech graduate from GGSIPU, I specialize in full-stack web development with a focus on the MERN stack (MongoDB, Express.js, React, Node.js) and Next.js.",
-  summary:
-  "As a passionate and driven B.Tech graduate from GGSIPU, I specialize in full-stack web development with a focus on the MERN stack (MongoDB, Express.js, React, Node.js) and Next.js. I thrive on turning complex problems into elegant solutions, leveraging my knowledge of data structures and algorithms (DSA) to create efficient, scalable applications.With a strong foundation in JavaScript, I have experience building dynamic, user-friendly web applications that enhance user experience and engagement. My skills in API development and integrating various web technologies allow me to contribute effectively in collaborative environments.",
-  avatarUrl: "/me.png",
-  skills: [
-    "React",
-    "Next.js",
-    "Typescript",
-    "Javascript",
-    "Node.js",
-    "MongoDB",
-    "TailwindCss",
-    "PostgreSql",
-    "Prisma",
-    "Docker",
-    "Java",
+  "I am a Full-Stack Engineer and AI Architect with a track record of shipping production-level systems that bridge the gap between AI and real-world business automation. I specialize in architecting scalable MERN/Next.js applications and building autonomous AI pipelines that transform unstructured data into actionable business intelligence.",
+  summary: `I am a Full-Stack Engineer and AI Architect with a track record of shipping production-level systems that bridge the gap between AI and real-world business automation. I specialize in architecting scalable MERN/Next.js applications and building autonomous AI pipelines that transform unstructured data into actionable business intelligence.
 
+### Core Competencies
+
+- **AI Agentic Workflows:** Designing and deploying autonomous systems using LLMs, vector databases (RAG), and self-healing data pipelines.
+- **Full-Stack Architecture:** Building resilient applications with Next.js, Node.js, and Python (FastAPI/Flask), secured by industry-standard auth and transactional integrity.
+- **Infrastructure & Reliability:** Managing production workflows on AWS (EC2/Lambda), utilizing automated monitoring (Sentry), and implementing robust system observability.
+- **Data Engineering:** Expert in scraping, data transformation, and integrating complex APIs to automate workflows for lead generation and business intelligence.
+
+Driven by the philosophy of "Building for Scale," I focus on clean service-oriented architecture, data integrity, and autonomous logic. I have successfully shipped 22+ real-world projects, ranging from AI-integrated habit trackers and LMS platforms to complex analytics dashboards and automated lead-gen agents.`,
+  avatarUrl: "/me.png",
+  skills:  [
+    // Full-Stack Core
+    "TypeScript",
+    "Next.js",
+    "React",
+    "Node.js",
+    "JavaScript",
+    "TailwindCSS",
+  
+    // Database & Data
+    "PostgreSQL",
+    "MongoDB",
+    "Prisma",
+  
+    // AI & Automation
+    "Python (FastAPI/Flask)",
+    "Agentic Workflows",
+    "RAG Pipelines",
+    "LLM Integration",
+  
+    // Infrastructure & Reliability
+    "AWS (EC2)",
+    "Docker",
+    "CI/CD",
+    "Monitoring & Observability (Sentry)",
+  
+    // Integration & Systems
+    "Headless WordPress",
+    "REST APIs",
+    "OAuth/Auth Implementation"
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },

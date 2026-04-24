@@ -1,13 +1,13 @@
+import "./globals.css";
 import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
-import "./globals.css";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
-const fontSans = FontSans({
+const fontSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -19,6 +19,11 @@ export const metadata: Metadata = {
     template: `%s | ${DATA.name}`,
   },
   description: DATA.description,
+  icons: {
+    icon: "/initial.png",
+    shortcut: "/initial.png",
+    apple: "/initial.png",
+  },
   openGraph: {
     title: `${DATA.name}`,
     description: DATA.description,
