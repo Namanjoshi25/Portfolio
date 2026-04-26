@@ -34,21 +34,20 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
     "Prisma",
   
     // AI & Automation
-    "Python (FastAPI/Flask)",
+    "Python",
+    "FastAPI",
+    "Celery",
+    "Redis",
     "Agentic Workflows",
-    "RAG Pipelines",
     "LLM Integration",
   
     // Infrastructure & Reliability
     "AWS (EC2)",
     "Docker",
     "CI/CD",
-    "Monitoring & Observability (Sentry)",
+ 
   
-    // Integration & Systems
-    "Headless WordPress",
-    "REST APIs",
-    "OAuth/Auth Implementation"
+
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -115,6 +114,35 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
   ],
   projects: [
     {
+      title: "Autonomous Document RAG Orchestrator",
+      href: "https://github.com/Namanjoshi25/Dsa_rag",
+      dates: "Feb 2026 - Mar 2026",
+      active: true,
+      description:
+        "Engineered a scalable, distributed RAG infrastructure enabling users to create domain-specific knowledge bases from uploaded documentation. Implemented an asynchronous task-processing architecture using Celery and Redis to handle compute-intensive vector embedding, with FastAPI providing a robust backend and React delivering an intuitive, type-safe frontend interface.",
+      technologies: [
+        "Python",
+        "FastAPI",
+        "Celery",
+        "Redis",
+        "Docker",
+        "React",
+        "TypeScript",
+        "Prisma",
+        "Zod",
+        "Vector Databases"
+      ],
+      links: [
+        {
+          type: "Source Code",
+          href: "https://github.com/Namanjoshi25/Dsa_rag",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "", // Add a demo video if you have one!
+    },
+    {
       title: "Learning management system",
       href: "https://learning-management-system-pi-liard.vercel.app/",
       dates: "Dec 2024 - Jan 2025",
@@ -145,6 +173,35 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
     },
     {
+      title: "TrackYourGoals - AI-Powered Goal & Project Tracker",
+      href: "https://github.com/your-username/trackyourgoals",
+      dates: "Jan 2026 - Present",
+      active: true,
+      description:
+        "Built a full-stack productivity platform to manage goals, projects, and daily progress in one unified dashboard. Implemented secure authentication, real-time progress insights, and an AI agent workflow for natural-language goal/project actions using Next.js, TypeScript, Prisma, and PostgreSQL.",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Prisma",
+        "PostgreSQL",
+        "NextAuth.js",
+        "Tailwind CSS",
+        "OpenAI",
+        "PWA",
+        "Recharts"
+      ],
+      links: [
+        {
+          type: "Source Code",
+          href: "https://github.com/your-username/trackyourgoals",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/motivlty_v2.mp4",
+    },
+    {
       title: "Neuzy",
       href: "https://neuzy-frontend.onrender.com",
       dates: "Jan 2024 - Feb 2024",
@@ -171,61 +228,8 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
     },
-    {
-      title: "Cric-Info",
-      href: "https://cric-info-seven.vercel.app/",
-      dates: "July 2024 - July 2024",
-      active: true,
-      description:
-      " A live cricket score and commentary app that provides real-time updates on matches. Users can track scores, player stats, and commentary, as well as view scorecards and team data. It incorporates APIs to fetch live cricket data and presents it in an intuitive interface",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "Api",
-        "Node.js",
-        "TailwindCSS",
-        "ShadCn",
+    
 
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://cric-info-seven.vercel.app/",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "",
-      video:
-        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
-    },
-    {
-      title: "Calorie Counter",
-      href: "https://calorie-counter-iota.vercel.app/",
-      dates: "June 2024 - July 2024",
-      active: true,
-      description:
-" A user-focused application that helps individuals calculate their daily caloric intake based on their personal health metrics and goals. The app includes personalized meal logging, streak tracking, and visualization of meal data for effective progress tracking.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "MongoDB",
-        "Node.js",
-        "TailwindCSS",
-        "ShadCn",
-        "Chart.js",
-
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://calorie-counter-iota.vercel.app/",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "",
-      video:
-        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
-    },
     
   ],
  
