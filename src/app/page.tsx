@@ -80,10 +80,12 @@ export default function Page() {
               </div>
               <div className="flex flex-wrap gap-2.5 pt-1">
                 <Link
-                  href={DATA.contact.social.LinkedIn.url}
+                  href={DATA.resumeUrl}
+                  target="_blank"
+                  rel="noreferrer"
                   className="inline-flex items-center rounded-lg bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90"
                 >
-                  Book a Call
+                  View Resume
                   <ArrowUpRight className="ml-1 size-4" />
                 </Link>
                 <Link
@@ -155,12 +157,30 @@ export default function Page() {
       </section>
       <section id="about" className={SECTION_DIVIDER_CLASS}>
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
-          <h2 className="text-xl font-bold">About</h2>
+          <div className="space-y-2">
+            <h2 className="text-xl font-bold">About</h2>
+            <p className="text-sm text-muted-foreground">
+              Building scalable products that combine strong engineering with practical AI automation.
+            </p>
+          </div>
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 4}>
-          <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-            {DATA.summary}
-          </Markdown>
+          <div className="rounded-2xl border border-border/60 bg-card/30 p-5 shadow-sm backdrop-blur-sm md:p-6">
+            <div className="mb-4 flex flex-wrap gap-2">
+              {["AI Agentic Workflows", "Full-Stack Architecture", "Data Engineering"].map((pill) => (
+                <Badge
+                  key={pill}
+                  variant="secondary"
+                  className="rounded-full border border-border/60 bg-background/70 px-3 py-1 text-xs"
+                >
+                  {pill}
+                </Badge>
+              ))}
+            </div>
+            <Markdown className="prose max-w-full text-pretty font-sans text-sm leading-7 text-muted-foreground dark:prose-invert prose-headings:text-foreground prose-strong:text-foreground">
+              {DATA.summary}
+            </Markdown>
+          </div>
         </BlurFade>
       </section>
   
@@ -216,6 +236,7 @@ export default function Page() {
                   href={project.href}
                   key={project.title}
                   title={project.title}
+                  type={"type" in project ? project.type : undefined}
                   description={project.description}
                   dates={project.dates}
                   tags={project.technologies}

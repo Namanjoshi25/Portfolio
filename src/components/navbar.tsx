@@ -11,10 +11,12 @@ import {
 import { cn } from "@/lib/utils";
 import { FolderKanban, Home, Mail, UserRound } from "lucide-react";
 import Link from "next/link";
+import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const [isAtTop, setIsAtTop] = useState(true);
+  const [activeHref, setActiveHref] = useState("#hero");
   const navItems = [
     { href: "#hero", label: "Home", icon: Home },
     { href: "#projects", label: "Projects", icon: FolderKanban },
@@ -29,6 +31,49 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("#")) return;
+
+    event.preventDefault();
+    setActiveHref(href);
+
+    const target = document.querySelector(href);
+    if (!target) return;
+
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", href);
+  };
+
+  useEffect(() => {
+    const sectionIds = ["hero", "projects", "about", "contact"];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target.id) {
+          setActiveHref(`#${visible.target.id}`);
+        }
+      },
+      {
+        root: null,
+        rootMargin: "-35% 0px -45% 0px",
+        threshold: [0.2, 0.4, 0.6, 0.8],
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -46,7 +91,13 @@ export default function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              onClick={(event) => handleNavClick(event, item.href)}
+              className={cn(
+                "rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                activeHref === item.href
+                  ? "bg-muted text-foreground"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
             >
               {item.label}
             </Link>
@@ -73,9 +124,11 @@ export default function Navbar() {
               <TooltipTrigger asChild>
                 <Link
                   href={item.href}
+                  onClick={(event) => handleNavClick(event, item.href)}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "icon" }),
-                    "size-12"
+                    "size-12",
+                    activeHref === item.href && "bg-muted text-foreground"
                   )}
                 >
                   <item.icon className="size-[18px]" />

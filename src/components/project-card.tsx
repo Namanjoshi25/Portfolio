@@ -13,6 +13,7 @@ import Markdown from "react-markdown";
 
 interface Props {
   title: string;
+  type?: string;
   href?: string;
   description: string;
   dates: string;
@@ -30,6 +31,7 @@ interface Props {
 
 export function ProjectCard({
   title,
+  type,
   href,
   description,
   dates,
@@ -72,7 +74,14 @@ export function ProjectCard({
       </Link>
       <CardHeader className="px-2">
         <div className="space-y-1">
-          <CardTitle className="mt-1 text-base">{title}</CardTitle>
+          <div className="mt-1 flex items-center gap-2">
+            <CardTitle className="text-base">{title}</CardTitle>
+            {type && (
+              <Badge className="w-fit border-blue-300/60 bg-blue-100 text-blue-700 dark:border-blue-500/40 dark:bg-blue-500/20 dark:text-blue-200">
+                {type}
+              </Badge>
+            )}
+          </div>
           <time className="font-sans text-xs">{dates}</time>
           <div className="hidden font-sans text-xs underline print:visible">
             {link?.replace("https://", "").replace("www.", "").replace("/", "")}

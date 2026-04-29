@@ -20,9 +20,12 @@ export const metadata: Metadata = {
   },
   description: DATA.description,
   icons: {
-    icon: "/initial.png",
-    shortcut: "/initial.png",
-    apple: "/initial.png",
+    icon: [
+      { url: "/personal/nj-favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/personal/nj-favicon-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/personal/nj-favicon-32x32.png",
+    apple: "/personal/nj-favicon-180x180.png",
   },
   openGraph: {
     title: `${DATA.name}`,

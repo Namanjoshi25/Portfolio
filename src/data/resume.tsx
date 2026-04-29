@@ -8,6 +8,7 @@ export const DATA = {
   location: "Delhi ,India",
   description:
   "I am a Full-Stack Engineer and AI Architect with a track record of shipping production-level systems that bridge the gap between AI and real-world business automation. I specialize in architecting scalable MERN/Next.js applications and building autonomous AI pipelines that transform unstructured data into actionable business intelligence.",
+  resumeUrl: "/personal/resume.pdf",
   summary: `I am a Full-Stack Engineer and AI Architect with a track record of shipping production-level systems that bridge the gap between AI and real-world business automation. I specialize in architecting scalable MERN/Next.js applications and building autonomous AI pipelines that transform unstructured data into actionable business intelligence.
 
 ### Core Competencies
@@ -114,6 +115,33 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
   ],
   projects: [
     {
+      title: "O2 Nutrition",
+      type: "Client",
+      href: "https://o2nutrition.com/",
+      dates: "2026",
+      active: true,
+      description:
+        "Built and shipped a client-facing nutrition platform for O2 Nutrition with secure OTP verification flows, social login via Facebook and Apple, and payment gateway integration using Cashfree for seamless checkout.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "OTP Verification",
+        "Facebook Auth",
+        "Apple Auth",
+        "Cashfree",
+        "TailwindCSS"
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://o2nutrition.com/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/clients/o2_main.png",
+      video: "",
+    },
+    {
       title: "Autonomous Document RAG Orchestrator",
       href: "https://github.com/Namanjoshi25/Dsa_rag",
       dates: "Feb 2026 - Mar 2026",
@@ -164,9 +192,10 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
       ],
       links: [
         {
-          type: "Source Code",
-          href: "https://github.com/your-username/trackyourgoals",
-          icon: <Icons.github className="size-3" />,
+          type: "Website",
+          href: "https://trackyourgoals-omega.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+         
         },
       ],
       image: "",
@@ -202,7 +231,7 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
     },
-    {
+   /*  {
       title: "Neuzy",
       href: "https://neuzy-frontend.onrender.com",
       dates: "Jan 2024 - Feb 2024",
@@ -228,7 +257,7 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
-    },
+    }, */
     
 
     
