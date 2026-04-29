@@ -140,7 +140,37 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
         },
       ],
       image: "",
-      video: "", // Add a demo video if you have one!
+      video: "/agentic_rag_v2.mp4", // Add a demo video if you have one!
+    },
+  
+    {
+      title: "TrackYourGoals - AI-Powered Goal & Project Tracker",
+      href: "https://github.com/your-username/trackyourgoals",
+      dates: "Jan 2026 - Present",
+      active: true,
+      description:
+        "Built a full-stack productivity platform to manage goals, projects, and daily progress in one unified dashboard. Implemented secure authentication, real-time progress insights, and an AI agent workflow for natural-language goal/project actions using Next.js, TypeScript, Prisma, and PostgreSQL.",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Prisma",
+        "PostgreSQL",
+        "NextAuth.js",
+        "Tailwind CSS",
+        "OpenAI",
+        "PWA",
+        "Recharts"
+      ],
+      links: [
+        {
+          type: "Source Code",
+          href: "https://github.com/your-username/trackyourgoals",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/motivlty_v2.mp4",
     },
     {
       title: "Learning management system",
@@ -171,35 +201,6 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
-    },
-    {
-      title: "TrackYourGoals - AI-Powered Goal & Project Tracker",
-      href: "https://github.com/your-username/trackyourgoals",
-      dates: "Jan 2026 - Present",
-      active: true,
-      description:
-        "Built a full-stack productivity platform to manage goals, projects, and daily progress in one unified dashboard. Implemented secure authentication, real-time progress insights, and an AI agent workflow for natural-language goal/project actions using Next.js, TypeScript, Prisma, and PostgreSQL.",
-      technologies: [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "Prisma",
-        "PostgreSQL",
-        "NextAuth.js",
-        "Tailwind CSS",
-        "OpenAI",
-        "PWA",
-        "Recharts"
-      ],
-      links: [
-        {
-          type: "Source Code",
-          href: "https://github.com/your-username/trackyourgoals",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "/motivlty_v2.mp4",
     },
     {
       title: "Neuzy",

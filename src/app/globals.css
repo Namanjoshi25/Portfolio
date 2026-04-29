@@ -143,6 +143,29 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
   width: 3rem;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: none;
+}
+
+::view-transition-new(root) {
+  animation-name: theme-reveal-clip;
+}
+
+@keyframes theme-reveal-clip {
+  from {
+    clip-path: circle(0 at var(--theme-x, 50%) var(--theme-y, 50%));
+  }
+  to {
+    clip-path: circle(var(--theme-r, 150vmax) at var(--theme-x, 50%) var(--theme-y, 50%));
+  }
+}
+
 @keyframes glow-sweep {
   0% {
     transform: translateX(-180%) skewX(-18deg);

@@ -7,6 +7,7 @@ import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
+import { ArrowUpRight, Star } from "lucide-react";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
@@ -39,45 +40,70 @@ const SKILL_ICONS: Record<string, string> = {
 
 export default function Page() {
   return (
-    <main className="flex flex-col min-h-[100dvh] space-y-10">
+    <main className="flex min-h-[100dvh] flex-col space-y-10">
       <section id="hero">
-        <div className="mx-auto w-full max-w-3xl space-y-8">
-          <div className="gap-2 flex justify-between">
-            <div className="flex-col flex flex-1 space-y-1.5">
-              <div className="flex flex-wrap items-start gap-3">
-                <BlurFadeText
-                  delay={BLUR_FADE_DELAY}
-                  className="text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl/none"
-                  yOffset={8}
-                  text={`${DATA.name}`}
-                />
-                <BlurFadeText
-                  text="Open to Work"
-                  className="-translate-y-1 glow-sweep rounded-md border border-emerald-200/50 bg-emerald-300/15 px-2 py-1 text-sm text-emerald-100 backdrop-blur-md"
-                  delay={BLUR_FADE_DELAY + 0.05}
+        <div className="w-full space-y-8">
+          <div className="flex flex-col gap-6 rounded-2xl border border-border/50 bg-card/20 p-5 shadow-sm md:p-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex-1 space-y-4">
+              <BlurFadeText
+                text="● Open to Work"
+                className="inline-flex rounded-full border border-emerald-300/50 bg-emerald-400/15 px-3 py-1 text-sm font-medium text-emerald-300"
+                delay={BLUR_FADE_DELAY + 0.02}
+              />
+              <div className="space-y-4 gap-y-2">
+                <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+                  {DATA.name}
+                </h1>
+                <RotatingText
+                  intervalMs={3000}
+                  items={[
+                    `${DATA.experience[0].title} @ ${DATA.experience[0].company}`,
+                    "Fullstack AI Developer @ AISolv",
+                    "Building AI solutions for businesses",
+                    "Automating manual processes",
+                  ]}
+                  className="text-base mb-4 text-muted-foreground"
                 />
               </div>
-              <div className="ml-2">
-                
-                  <RotatingText
-                  intervalMs={2000}
-                    items={[
-                      `${DATA.experience[0].title} @ ${DATA.experience[0].company}`,
-                      "Building AI solutions for businesses",
-                      "Automating manual processes",
-                    ]}
-                    className="text-sm text-muted-foreground"
-                  />
-               
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Fullstack Developer",
+                  "AI Automation",
+                  "LLM Pipelines",
+                  "GCP - AWS",
+                  "n8n - Claude",
+                ].map((item) => (
+                  <Badge key={item} variant="secondary" className="rounded-full px-2.5 py-1 text-xs">
+                    {item}
+                  </Badge>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2.5 pt-1">
+                <Link
+                  href={DATA.contact.social.LinkedIn.url}
+                  className="inline-flex items-center rounded-lg bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                >
+                  Book a Call
+                  <ArrowUpRight className="ml-1 size-4" />
+                </Link>
+                <Link
+                  href="#projects"
+                  className="inline-flex items-center rounded-lg border border-border/70 bg-background px-3.5 py-1.5 text-xs font-semibold transition-colors hover:bg-muted/50"
+                >
+                  View Projects
+                </Link>
               </div>
             </div>
-         
-            <BlurFade delay={BLUR_FADE_DELAY}>
-              <Avatar className="size-28 border">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
-              </Avatar>
-            </BlurFade>
+
+            <div className="flex flex-col items-start gap-4 lg:items-end">
+              <BlurFade delay={BLUR_FADE_DELAY}>
+                <Avatar className="size-24 border-2 border-sky-300/50 bg-sky-500">
+                  <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+                  <AvatarFallback className="bg-sky-500 text-3xl">🧑‍💻</AvatarFallback>
+                </Avatar>
+              </BlurFade>
+             
+            </div>
           </div>
         </div>
       </section>

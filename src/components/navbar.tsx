@@ -1,22 +1,73 @@
+"use client";
+
 import { Dock, DockIcon } from "@/components/magicui/dock";
 import { ModeToggle } from "@/components/mode-toggle";
 import { buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
+import { FolderKanban, Home, Mail, UserRound } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+  const [isAtTop, setIsAtTop] = useState(true);
+  const navItems = [
+    { href: "#hero", label: "Home", icon: Home },
+    { href: "#projects", label: "Projects", icon: FolderKanban },
+    { href: "#about", label: "About", icon: UserRound },
+    { href: "#contact", label: "Contact", icon: Mail },
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => setIsAtTop(window.scrollY <= 16);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
-      <div className="fixed bottom-0 inset-x-0 h-16 w-full bg-background to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_top,black,transparent)] dark:bg-background"></div>
-      <Dock className="z-50 pointer-events-auto relative mx-auto flex min-h-full h-full items-center px-1 bg-background [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] ">
-        {DATA.navbar.map((item) => (
+    <>
+      <header
+        className={cn(
+          "relative z-20 mb-6 flex justify-center transition-all duration-500 ease-out",
+          isAtTop
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-6 opacity-0 pointer-events-none"
+        )}
+      >
+        <nav className="inline-flex w-full max-w-md items-center justify-between rounded-full border border-border/60 bg-background/80 p-1.5 shadow-sm backdrop-blur">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            >
+              {item.label}
+            </Link>
+          ))}
+          <div className="pl-1">
+            <ModeToggle />
+          </div>
+        </nav>
+      </header>
+
+      <div
+        className={cn(
+          "pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14 transition-all duration-500 ease-out",
+          isAtTop
+            ? "translate-y-10 opacity-0"
+            : "translate-y-0 opacity-100"
+        )}
+      >
+        <div className="fixed bottom-0 inset-x-0 h-16 w-full bg-background to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_top,black,transparent)] dark:bg-background"></div>
+        <Dock className="z-50 pointer-events-auto relative mx-auto flex min-h-full h-full items-center px-1 bg-background [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] ">
+          {navItems.map((item) => (
           <DockIcon key={item.href}>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -27,7 +78,7 @@ export default function Navbar() {
                     "size-12"
                   )}
                 >
-                  <item.icon className="size-4" />
+                  <item.icon className="size-[18px]" />
                 </Link>
               </TooltipTrigger>
               <TooltipContent>
@@ -36,41 +87,18 @@ export default function Navbar() {
             </Tooltip>
           </DockIcon>
         ))}
-        <Separator orientation="vertical" className="h-full" />
-        {Object.entries(DATA.contact.social)
-          .filter(([_, social]) => social.navbar)
-          .map(([name, social]) => (
-            <DockIcon key={name}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={social.url}
-                    className={cn(
-                      buttonVariants({ variant: "ghost", size: "icon" }),
-                      "size-12"
-                    )}
-                  >
-                    <social.icon className="size-4" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{name}</p>
-                </TooltipContent>
-              </Tooltip>
-            </DockIcon>
-          ))}
-        <Separator orientation="vertical" className="h-full py-2" />
-        <DockIcon>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <ModeToggle />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Theme</p>
-            </TooltipContent>
-          </Tooltip>
-        </DockIcon>
-      </Dock>
-    </div>
+          <DockIcon>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <ModeToggle />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Theme</p>
+              </TooltipContent>
+            </Tooltip>
+          </DockIcon>
+        </Dock>
+      </div>
+    </>
   );
 }
