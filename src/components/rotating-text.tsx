@@ -29,7 +29,7 @@ export function RotatingText({
   }, [items, intervalMs]);
 
   return (
-    <div className={`relative h-5 overflow-hidden ${className ?? ""}`}>
+    <div className={`relative h-7 overflow-hidden ${className ?? ""}`}>
       <AnimatePresence mode="wait">
         <motion.span
           key={items[activeIndex]}

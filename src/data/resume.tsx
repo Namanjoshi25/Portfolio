@@ -13,8 +13,9 @@ export const DATA = {
 
 ### Core Competencies
 
-- **AI Agentic Workflows:** Designing and deploying autonomous systems using LLMs, vector databases (RAG), and self-healing data pipelines.
-- **Full-Stack Architecture:** Building resilient applications with Next.js, Node.js, and Python (FastAPI/Flask), secured by industry-standard auth and transactional integrity.
+- **Payments & Production Backends:** Shipping client platforms with Stripe Connect split-payments, async FastAPI services, Redis/RQ background workers, and PostgreSQL/MySQL data layers.
+- **Full-Stack Architecture:** Building resilient multi-tenant applications with Next.js, Node.js, and Python (FastAPI/Flask), secured by role-based access control, audit logging, and transactional integrity.
+- **AI Agentic Workflows:** Designing autonomous systems using LLMs and vector databases (RAG) to turn unstructured data into actionable intelligence.
 - **Infrastructure & Reliability:** Managing production workflows on AWS (EC2/Lambda), utilizing automated monitoring (Sentry), and implementing robust system observability.
 - **Data Engineering:** Expert in scraping, data transformation, and integrating complex APIs to automate workflows for lead generation and business intelligence.
 
@@ -44,8 +45,12 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
   
     // Infrastructure & Reliability
     "AWS (EC2)",
+    "GCP",
     "Docker",
     "CI/CD",
+    "Stripe",
+    "MySQL",
+    "SQLAlchemy",
  
   
 
@@ -86,7 +91,7 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
  
   education: [
     {
-      school: "Guru Teg Bahadur Insituite of Technology",
+      school: "Guru Tegh Bahadur Institute of Technology",
       href: "https://buildspace.so",
       degree: "Btech",
       logoUrl: "/buildspace.jpg",
@@ -111,14 +116,67 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
       logoUrl: "/buildspace.jpg",
       start: "Aug 2025",
       end: "Present",
+      badges: ["FastAPI", "Next.js", "AWS", "Stripe"],
+      description:
+        "Shipped production client platforms end-to-end. Built a social-dining booking product with Stripe Connect split-payments and payouts, Redis/RQ background workers, and SMS + web-push notifications on an async FastAPI + PostgreSQL backend with a Next.js 16 / React 19 frontend. Delivered a multi-tenant B2B healthcare dashboard with role-based access control, audit logging, and PDF reporting deployed on AWS ECS Fargate.",
     },
   ],
   projects: [
     {
+      title: "Tableside — Social Dining Platform",
+      type: "Client",
+      href: "#",
+      dates: "2025",
+      active: true,
+      description:
+        "Built a curated social-dining platform where diners book shared tables at partner restaurants. Engineered an async FastAPI backend with Stripe Connect for split payments and payouts, Redis/RQ background workers, and SMS + web-push notifications, paired with a Next.js 16 / React 19 frontend. Delivered at AISolv.",
+      technologies: [
+        "FastAPI",
+        "Python",
+        "PostgreSQL",
+        "SQLAlchemy",
+        "Redis",
+        "Stripe Connect",
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Docker",
+        "GCP",
+      ],
+      links: [],
+      image: "",
+      video: "",
+    },
+    {
+      title: "Hilo — B2B Healthcare Dashboard",
+      type: "Client",
+      href: "#",
+      dates: "2025",
+      active: true,
+      description:
+        "Developed a multi-tenant B2B healthcare dashboard for clinics to manage doctors, patients and vitals data. Implemented granular role-based access control, audit logging, and PDF report delivery on a FastAPI + MySQL backend deployed on AWS ECS Fargate, with a Next.js dashboard using TanStack Query and shadcn/ui. Delivered at AISolv.",
+      technologies: [
+        "FastAPI",
+        "Python",
+        "MySQL",
+        "AWS",
+        "ECS Fargate",
+        "Next.js",
+        "React",
+        "TypeScript",
+        "TanStack Query",
+        "RBAC",
+        "shadcn/ui",
+      ],
+      links: [],
+      image: "",
+      video: "",
+    },
+    {
       title: "O2 Nutrition",
       type: "Client",
       href: "https://o2nutrition.com/",
-      dates: "2026",
+      dates: "2025",
       active: true,
       description:
         "Built and shipped a client-facing nutrition platform for O2 Nutrition with secure OTP verification flows, social login via Facebook and Apple, and payment gateway integration using Cashfree for seamless checkout.",
@@ -144,7 +202,7 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
     {
       title: "Autonomous Document RAG Orchestrator",
       href: "https://github.com/Namanjoshi25/Dsa_rag",
-      dates: "Feb 2026 - Mar 2026",
+      dates: "Feb 2025 - Mar 2025",
       active: true,
       description:
         "Engineered a scalable, distributed RAG infrastructure enabling users to create domain-specific knowledge bases from uploaded documentation. Implemented an asynchronous task-processing architecture using Celery and Redis to handle compute-intensive vector embedding, with FastAPI providing a robust backend and React delivering an intuitive, type-safe frontend interface.",
@@ -173,8 +231,8 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
   
     {
       title: "TrackYourGoals - AI-Powered Goal & Project Tracker",
-      href: "https://github.com/your-username/trackyourgoals",
-      dates: "Jan 2026 - Present",
+      href: "https://trackyourgoals-omega.vercel.app/",
+      dates: "Jan 2025 - Present",
       active: true,
       description:
         "Built a full-stack productivity platform to manage goals, projects, and daily progress in one unified dashboard. Implemented secure authentication, real-time progress insights, and an AI agent workflow for natural-language goal/project actions using Next.js, TypeScript, Prisma, and PostgreSQL.",
@@ -207,7 +265,7 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
       dates: "Dec 2024 - Jan 2025",
       active: true,
       description:
-      "Developed an LMS project using Next.js for the frontend and PostgreSQL for the database This project likely includes features like user authentication, course creation and management, and the abilityto search and filter courses dynamically",
+      "Developed an LMS using Next.js for the frontend and PostgreSQL for the database, with features including user authentication, course creation and management, and dynamic course search and filtering.",
       technologies: [
         "Next.js",
         "Zod",

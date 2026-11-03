@@ -1,3 +1,4 @@
+import BorderBeam from "@/components/magicui/border-beam";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -45,9 +46,12 @@ export function ProjectCard({
   return (
     <Card
       className={
-        "flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full"
+        "group relative flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full"
       }
     >
+      <div className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+        <BorderBeam size={120} duration={16} />
+      </div>
       <Link
         href={href || "#"}
         className={cn("block cursor-pointer", className)}
