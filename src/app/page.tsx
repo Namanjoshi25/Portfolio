@@ -4,6 +4,7 @@ import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { ProjectCard } from "@/components/project-card";
 import { RotatingText } from "@/components/rotating-text";
 import { ResumeCard } from "@/components/resume-card";
+import { ProjectsSection } from "@/components/projects-section";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
@@ -54,7 +55,7 @@ export default function Page() {
             <div className="flex-1 space-y-4">
               <BlurFadeText
                 text="● Open to Work"
-                className="inline-flex rounded-full border border-emerald-300/50 bg-emerald-400/15 px-3 py-1 text-sm font-medium text-emerald-300"
+                className="inline-flex rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-700 dark:border-emerald-300/50 dark:bg-emerald-400/15 dark:text-emerald-300 [.newspaper_&]:border-[hsl(90_25%_30%/0.4)] [.newspaper_&]:bg-[hsl(90_25%_35%/0.12)] [.newspaper_&]:text-[hsl(90_30%_24%)]"
                 delay={BLUR_FADE_DELAY + 0.02}
               />
               <div className="space-y-4 gap-y-2">
@@ -62,6 +63,7 @@ export default function Page() {
                   {DATA.name}
                 </h1>
                 <RotatingText
+                  variant="roll"
                   intervalMs={3000}
                   items={[
                     `${DATA.experience[0].title} @ ${DATA.experience[0].company}`,
@@ -76,9 +78,10 @@ export default function Page() {
                 {[
                   "Fullstack Developer",
                   "AI Automation",
-                  "LLM Pipelines",
-                  "GCP - AWS",
-                  "n8n - Claude",
+                  "RAG & LLM Pipelines",
+                  "FastAPI · Next.js",
+                  "AWS · GCP",
+                  "n8n · Claude",
                 ].map((item) => (
                   <Badge key={item} variant="secondary" className="rounded-full px-2.5 py-1 text-xs">
                     {item}
@@ -187,7 +190,7 @@ export default function Page() {
                 <Badge
                   key={skill}
                   title={skill}
-                  className="inline-flex h-12 w-12 items-center justify-center rounded-md border border-border/60 bg-white p-0 shadow-sm hover:border-border"
+                  className="inline-flex h-12 w-12 items-center justify-center rounded-md border border-border/60 bg-white p-0 shadow-sm hover:border-border [.newspaper_&]:bg-card"
                 >
                   <img
                     src={SKILL_ICONS[skill] ?? "https://skillicons.dev/icons?i=github"}
@@ -253,38 +256,7 @@ export default function Page() {
         </div>
       </section>
       <section id="projects" className={SECTION_DIVIDER_CLASS}>
-        <div className="flex min-h-0 flex-col gap-y-3">
-          <BlurFade delay={BLUR_FADE_DELAY * 11}>
-            <div className="space-y-1">
-              <h2 className="text-xl font-bold">Projects</h2>
-              <p className="text-sm text-muted-foreground">
-                A few things I&apos;ve built recently, from client sites to AI
-                pipelines.
-              </p>
-            </div>
-          </BlurFade>
-          <div className="mt-3 grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
-            {DATA.projects.map((project, id) => (
-              <BlurFade
-                key={project.title}
-                delay={BLUR_FADE_DELAY * 12 + id * 0.05}
-              >
-                <ProjectCard
-                  href={project.href}
-                  key={project.title}
-                  title={project.title}
-                  type={"type" in project ? project.type : undefined}
-                  description={project.description}
-                  dates={project.dates}
-                  tags={project.technologies}
-                  image={project.image}
-                  video={project.video}
-                  links={project.links}
-                />
-              </BlurFade>
-            ))}
-          </div>
-        </div>
+        <ProjectsSection projects={DATA.projects} />
       </section>
      
 
