@@ -5,55 +5,52 @@ export const DATA = {
   name: "Naman Joshi",
   initials: "NJ",
   url: "http://localhost:3000/",
-  location: "Delhi ,India",
+  location: "Delhi NCR, India",
   description:
-  "I am a Full-Stack Engineer and AI Architect with a track record of shipping production-level systems that bridge the gap between AI and real-world business automation. I specialize in architecting scalable MERN/Next.js applications and building autonomous AI pipelines that transform unstructured data into actionable business intelligence.",
+    "Software engineer at AISolv, building production FastAPI backends, LLM agents and evaluation pipelines, and Next.js frontends for client products.",
   resumeUrl: "/personal/resume.pdf",
-  summary: `I am a Full-Stack Engineer and AI Architect with a track record of shipping production-level systems that bridge the gap between AI and real-world business automation. I specialize in architecting scalable MERN/Next.js applications and building autonomous AI pipelines that transform unstructured data into actionable business intelligence.
+  summary: `I'm a software engineer at AISolv, an AI product studio, where I build production backends, LLM features and the tests around them for client products. Before that, I spent a year freelancing on e-commerce and web projects.
 
-### Core Competencies
+### What I work on
 
-- **Payments & Production Backends:** Shipping client platforms with Stripe Connect split-payments, async FastAPI services, Redis/RQ background workers, and PostgreSQL/MySQL data layers.
-- **Full-Stack Architecture:** Building resilient multi-tenant applications with Next.js, Node.js, and Python (FastAPI/Flask), secured by role-based access control, audit logging, and transactional integrity.
-- **AI Agentic Workflows:** Designing autonomous systems using LLMs and vector databases (RAG) to turn unstructured data into actionable intelligence.
-- **Infrastructure & Reliability:** Managing production workflows on AWS (EC2/Lambda), utilizing automated monitoring (Sentry), and implementing robust system observability.
-- **Data Engineering:** Expert in scraping, data transformation, and integrating complex APIs to automate workflows for lead generation and business intelligence.
-
-Driven by the philosophy of "Building for Scale," I focus on clean service-oriented architecture, data integrity, and autonomous logic. I have successfully shipped 22+ real-world projects, ranging from AI-integrated habit trackers and LMS platforms to complex analytics dashboards and automated lead-gen agents.`,
+- **Production backends:** async FastAPI services on PostgreSQL and MySQL, Redis/RQ workers and Alembic migrations, deployed on GCP Cloud Run and AWS ECS Fargate.
+- **LLM features:** tool-calling agents over real user data, LLM-as-judge evaluation pipelines, Langfuse tracing with cost tracking, and safety checks before and after the model.
+- **Production debugging:** fixing deadlocks and N+1 queries, such as a task sweep that made up to 500 database round trips per tick, which I cut to one batched query per task kind.
+- **Testing:** pytest, Vitest and Playwright suites, including 244 frontend test cases with accessibility checks on a clinical dashboard.
+- **Frontend:** Next.js and React dashboards and role-based portals.`,
   avatarUrl: "/me.png",
-  skills:  [
-    // Full-Stack Core
+  skills: [
+    // Languages
+    "Python",
     "TypeScript",
+
+    // Backend & data
+    "FastAPI",
+    "SQLAlchemy",
+    "PostgreSQL",
+    "MySQL",
+    "MongoDB",
+    "Redis / RQ",
+
+    // AI
+    "OpenAI API",
+    "Anthropic API",
+    "Tool-calling Agents",
+    "RAG (pgvector)",
+    "LLM-as-judge Evals",
+
+    // Cloud & DevOps
+    "AWS (ECS, SQS, SES)",
+    "GCP (Cloud Run)",
+    "Docker",
+    "GitHub Actions",
+
+    // Frontend & testing
     "Next.js",
     "React",
-    "Node.js",
-    "JavaScript",
-    "TailwindCSS",
-  
-    // Database & Data
-    "PostgreSQL",
-    "MongoDB",
-    "Prisma",
-  
-    // AI & Automation
-    "Python",
-    "FastAPI",
-    "Celery",
-    "Redis",
-    "Agentic Workflows",
-    "LLM Integration",
-  
-    // Infrastructure & Reliability
-    "AWS (EC2)",
-    "GCP",
-    "Docker",
-    "CI/CD",
-    "Stripe",
-    "MySQL",
-    "SQLAlchemy",
- 
-  
-
+    "pytest",
+    "Vitest",
+    "Playwright",
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -92,17 +89,17 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
   education: [
     {
       school: "Guru Tegh Bahadur Institute of Technology",
-      href: "https://buildspace.so",
-      degree: "Btech",
-      logoUrl: "/buildspace.jpg",
+      href: "#",
+      degree: "B.Tech, CGPA 8.67",
+      logoUrl: "",
       start: "2020",
       end: "2024",
     },
     {
       school: "Bal Bharati Public School",
-      href: "https://uwaterloo.ca",
+      href: "#",
       degree: "Schooling",
-      logoUrl: "/waterloo.png",
+      logoUrl: "",
       start: "2008",
       end: "2020",
     },
@@ -112,13 +109,24 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
     {
       company: "AISolv",
       href: "#",
-      title: "Full-Stack AI Developer",
-      logoUrl: "/buildspace.jpg",
+      title: "Software Engineer",
+      logoUrl: "",
       start: "Aug 2025",
       end: "Present",
-      badges: ["FastAPI", "Next.js", "AWS", "Stripe"],
+      badges: ["FastAPI", "PostgreSQL", "OpenAI", "Next.js", "AWS", "GCP"],
       description:
-        "Shipped production client platforms end-to-end. Built a social-dining booking product with Stripe Connect split-payments and payouts, Redis/RQ background workers, and SMS + web-push notifications on an async FastAPI + PostgreSQL backend with a Next.js 16 / React 19 frontend. Delivered a multi-tenant B2B healthcare dashboard with role-based access control, audit logging, and PDF reporting deployed on AWS ECS Fargate.",
+        "Build production backends, LLM features and frontends for client products at an AI product studio. On Tableside, a social-dining marketplace, I built onboarding, auth and portals for all four user roles. I also fixed a production deadlock that made every invite acceptance wait out a 60 s timeout, and removed an N+1 sweep that made up to 500 database round trips per tick. On Ask Hilo, I built 13 tool-calling functions over wearable data, an LLM-as-judge evaluation pipeline and the safety layer. On the Hilo clinical dashboard, I built 27 of the 30 frontend pages and a CI suite of 244 Vitest cases plus Playwright tests.",
+    },
+    {
+      company: "Freelance",
+      href: "#",
+      title: "Full-Stack Developer",
+      logoUrl: "",
+      start: "Jun 2024",
+      end: "Jul 2025",
+      badges: ["Shopify"],
+      description:
+        "Delivered 4 client e-commerce and web projects, including Shopify storefronts.",
     },
   ],
   projects: [
@@ -129,19 +137,19 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
       dates: "2025",
       active: true,
       description:
-        "Built a curated social-dining platform where diners book shared tables at partner restaurants. Engineered an async FastAPI backend with Stripe Connect for split payments and payouts, Redis/RQ background workers, and SMS + web-push notifications, paired with a Next.js 16 / React 19 frontend. Delivered at AISolv.",
+        "Social-dining marketplace where diners book shared tables at partner venues. Built onboarding, auth and portals for all four user roles (diners, venues, hosts, admins), plus venue slots, event assembly and the host-assignment approval gate. Wrote 28 Alembic migrations and created 144 test files. Fixed a production deadlock that made every SMS or email invite acceptance wait out a 60 s timeout, and replaced an N+1 reconciliation sweep (up to 500 database round trips per tick) with one batched query per task kind. Delivered at AISolv.",
       technologies: [
         "FastAPI",
         "Python",
         "PostgreSQL",
         "SQLAlchemy",
+        "Alembic",
         "Redis",
-        "Stripe Connect",
+        "RQ",
         "Next.js",
         "React",
         "TypeScript",
-        "Docker",
-        "GCP",
+        "GCP Cloud Run",
       ],
       links: [],
       image: "",
@@ -154,19 +162,20 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
       dates: "2025",
       active: true,
       description:
-        "Developed a multi-tenant B2B healthcare dashboard for clinics to manage doctors, patients and vitals data. Implemented granular role-based access control, audit logging, and PDF report delivery on a FastAPI + MySQL backend deployed on AWS ECS Fargate, with a Next.js dashboard using TanStack Query and shadcn/ui. Delivered at AISolv.",
+        "Multi-tenant clinical dashboard for clinics and their patients. Built the patient module, the wearable telemetry API, a signed magic-link consent flow, and an SQS + SES worker for patient-data exports (CSV and PDF). Built 27 of the 30 frontend pages and the frontend CI: 244 Vitest cases with accessibility checks (jest-axe), plus Playwright tests for auth and permissions. Delivered at AISolv.",
       technologies: [
         "FastAPI",
         "Python",
         "MySQL",
-        "AWS",
-        "ECS Fargate",
+        "MongoDB",
+        "AWS ECS Fargate",
+        "SQS",
+        "SES",
         "Next.js",
         "React",
         "TypeScript",
-        "TanStack Query",
-        "RBAC",
-        "shadcn/ui",
+        "Vitest",
+        "Playwright",
       ],
       links: [],
       image: "",
@@ -179,19 +188,18 @@ Driven by the philosophy of "Building for Scale," I focus on clean service-orien
       dates: "2025",
       active: true,
       description:
-        "Built the AI health-insights chat powering the Hilo mobile app. Engineered an async FastAPI backend that streams LLM responses over Server-Sent Events with resume-across-reconnect, idempotency and a full client state machine. Fuses wearable watch data from MongoDB with a pgvector FAQ RAG layer over OpenAI, backed by MySQL and Alembic migrations. Delivered at AISolv.",
+        "LLM health coach for a wearable blood-pressure device. Built 13 tool-calling functions over wearable data (blood pressure, sleep, heart rate, steps) that the agent uses to answer users' health questions. Built an LLM-as-judge evaluation pipeline that runs uploaded question sets on an RQ queue and scores every answer from 1 to 5, plus Langfuse tracing with cached-token cost tracking. Wrote the safety layer (emergency, PII and prescriptive-language checks before and after the model) and an Intercom human-handover flow, covered by 15 unit and integration tests. Delivered at AISolv.",
       technologies: [
         "FastAPI",
         "Python",
-        "SQLAlchemy",
-        "MySQL",
-        "MongoDB",
-        "PostgreSQL",
-        "pgvector",
         "OpenAI",
-        "SSE Streaming",
-        "RAG",
-        "Docker",
+        "Tool Calling",
+        "LLM-as-judge Evals",
+        "Langfuse",
+        "Redis",
+        "RQ",
+        "MongoDB",
+        "Intercom",
       ],
       links: [],
       image: "",
