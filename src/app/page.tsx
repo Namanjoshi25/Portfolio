@@ -5,6 +5,8 @@ import { ProjectCard } from "@/components/project-card";
 import { RotatingText } from "@/components/rotating-text";
 import { ResumeCard } from "@/components/resume-card";
 import { ProjectsSection } from "@/components/projects-section";
+import { ActivitySection } from "@/components/activity-graph";
+import { fetchContributionCalendar } from "@/lib/github";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
@@ -45,7 +47,10 @@ const SKILL_ICONS: Record<string, string> = {
   "OAuth/Auth Implementation": "https://cdn.simpleicons.org/auth0/EB5424",
 };
 
-export default function Page() {
+export const revalidate = 86400;
+
+export default async function Page() {
+  const activity = await fetchContributionCalendar();
   return (
     <main className="flex min-h-[100dvh] flex-col space-y-10">
       <section id="hero">
@@ -255,6 +260,7 @@ export default function Page() {
           ))}
         </div>
       </section>
+      <ActivitySection data={activity} />
       <section id="projects" className={SECTION_DIVIDER_CLASS}>
         <ProjectsSection projects={DATA.projects} />
       </section>

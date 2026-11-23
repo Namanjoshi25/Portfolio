@@ -50,8 +50,8 @@ Build:     `npm run build` (also typechecks, including test files)
   - Cells are `<button type="button" aria-label={tooltipText(day)}>` (via `TooltipTrigger asChild`) so they can be focused. `LEVEL_CLASSES` lives in `src/lib/contributions.ts`, because the server component can't import a non-component value from the `"use client"` cell file.
   - Tests (renderToStaticMarkup, wrapped in `TooltipProvider`): null → `""`, the heading and `id="activity"` are present, the total is formatted, the cell count equals the number of days, no `bg-primary` class, partial-week alignment, the legend has 5 swatches, the link has href/target/rel, and the first 27 of 53 weeks carry `hidden sm:flex`.
   verify: `npx vitest run src/components/activity-graph.test.tsx`
-- [ ] 5. Wire into `src/app/page.tsx`: make it async, add `export const revalidate = 86400`, fetch, and render `<ActivitySection>` directly before `#projects` — _covers: R1, R3, R4_ — run: `sonnet/medium`
-  approach: insert above `<section id="projects"` (around line 258) and change nothing else on the page. Run the build with no token (`env -u GITHUB_TOKEN`) and check that `/` is still `○` and the build passes.
+- [x] 5. Wire into `src/app/page.tsx`: make it async, add `export const revalidate = 86400`, fetch, and render `<ActivitySection>` directly before `#projects` — _covers: R1, R3, R4_ — run: `sonnet/medium`
+  approach: imports `ActivitySection` and `fetchContributionCalendar`, makes `Page` async with `export const revalidate = 86400`, and inserts `<ActivitySection data={activity} />` directly above `<section id="projects"`; nothing else on the page changed. Run the build with no token (`env -u GITHUB_TOKEN`) and check that `/` is still `○` and the build passes.
   verify: `env -u GITHUB_TOKEN npm run build 2>&1 | grep -E '^[├┌└] ○ /\s'`
 - [ ] 6. Run /code-review on the full feature diff (fresh context) and fix any
   confirmed findings. Run only the tests of the files you change; the full suite
