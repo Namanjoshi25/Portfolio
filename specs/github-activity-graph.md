@@ -56,17 +56,17 @@ shows a recruiter at a glance that he codes regularly, right before they look at
     fetch fallback returning `null` for each failure case in R4 (with `fetch` mocked).
 
 ## Acceptance Criteria
-- [ ] `npm test` passes, and its tests cover every item listed in R14.
-- [ ] `npm run build` succeeds and lists `/` as `○ (Static)`.
-- [ ] With a valid `GITHUB_TOKEN` in `.env.local`, `npm run dev` shows the Activity section
+- [x] `npm test` passes, and its tests cover every item listed in R14.
+- [x] `npm run build` succeeds and lists `/` as `○ (Static)`.
+- [x] With a valid `GITHUB_TOKEN` in `.env.local`, `npm run dev` shows the Activity section
       above Projects, with a total matching the user's GitHub profile.
-- [ ] With `GITHUB_TOKEN` unset, the homepage renders with no Activity section
+- [x] With `GITHUB_TOKEN` unset, the homepage renders with no Activity section
       and no errors in the server or browser console.
-- [ ] The graph is visually checked in light, dark and newspaper themes: level-0 and
+- [x] The graph is visually checked in light, dark and newspaper themes: level-0 and
       level-4 cells are clearly distinguishable in each.
 - [ ] At 375px viewport width, 26 week columns are visible and there is no horizontal page scroll.
-- [ ] Hovering a cell shows the correct tooltip text, and Tab-focusing a cell shows it too.
-- [ ] The `View on GitHub ↗` link opens the profile in a new tab.
+- [x] Hovering a cell shows the correct tooltip text, and Tab-focusing a cell shows it too.
+- [x] The `View on GitHub ↗` link opens the profile in a new tab.
 
 ## Out of Scope
 - Current streak, longest streak, most-active-day or any stats beyond the total.
