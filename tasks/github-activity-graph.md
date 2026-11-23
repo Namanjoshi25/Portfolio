@@ -35,8 +35,8 @@ Build:     `npm run build` (also typechecks, including test files)
 **Tests affected:** none found. The repo has no existing tests or e2e specs.
 
 ## Tasks
-- [ ] 1. Add Vitest (`npm i -D vitest`, `"test": "vitest run"`, `vitest.config.ts`) and create `src/lib/contributions.ts` with the types, `toLevel`, `formatTotal` and `tooltipText`, plus `src/lib/contributions.test.ts` — _covers: R6, R8, R11, R14_ — run: `sonnet/medium`
-  approach: `toLevel` maps NONE/FIRST_QUARTILE/…/FOURTH_QUARTILE → 0–4, with unknown values → 0. `formatTotal` uses `toLocaleString("en-US")`. `tooltipText` handles the 0 / 1 / many wording and formats the date in UTC (`new Date(date+"T00:00:00Z")`, `timeZone:"UTC"`). Tests cover every level, 0/1/5/1234, and a date near midnight that would shift in a non-UTC timezone.
+- [x] 1. Add Vitest (`npm i -D vitest`, `"test": "vitest run"`, `vitest.config.ts`) and create `src/lib/contributions.ts` with the types, `toLevel`, `formatTotal` and `tooltipText`, plus `src/lib/contributions.test.ts` — _covers: R6, R8, R11, R14_ — run: `sonnet/medium`
+  approach: `toLevel` maps NONE/FIRST_QUARTILE/…/FOURTH_QUARTILE → 0–4, with unknown values → 0. `formatTotal` uses `toLocaleString("en-US")`. `tooltipText` handles the 0 / 1 / many wording and formats the date in UTC (`new Date(date+"T00:00:00Z")`, `timeZone:"UTC"`). Counts of 1000+ in tooltips go through `formatTotal`. Tests cover every level, 0/1/5/1234, and `2026-01-01` with `process.env.TZ` set to America/Los_Angeles.
   verify: `npx vitest run src/lib/contributions.test.ts`
 - [ ] 2. Add `monthLabels(weeks)` and `isDesktopOnlyWeek(i, total)` to `src/lib/contributions.ts`, with tests in the same test file — _covers: R9, R12_ — run: `sonnet/medium`
   approach: `monthLabels` returns `(string|null)[]`, one entry per week. A week gets `"Jan"`… if one of its days has a date ending in `-01`, and the label is set to null if it falls ≤2 columns after the previous label. `isDesktopOnlyWeek(i,total)` = `i < total - 26`. Tests cover a month starting mid-week, two months starting 2 columns apart (the second is skipped), a partial first week, and total = 53 (i = 26 → true, i = 27 → false) or ≤ 26 (nothing hidden).
@@ -63,6 +63,7 @@ Build:     `npm run build` (also typechecks, including test files)
   verify: `npm test && npx tsc --noEmit && npm run build`
 
 ## Notes
+- Installed `vitest@^3` (not latest): vitest 5 peer-requires `@types/node` ^22/>=24, which conflicts with the repo's `@types/node@^20` (ERESOLVE).
 - `tsconfig.json` includes `**/*.ts(x)`, so `next build` and `tsc` typecheck test files too. Import `describe/it/expect/vi` from `"vitest"` explicitly (no globals).
 - Don't use the `server-only` package: it throws when imported under Vitest. Keeping the token server-side relies on only `page.tsx` importing `github.ts`.
 - GitHub returns dates as `YYYY-MM-DD`. Parsing them as local time shifts the day in negative-offset timezones, so always use UTC.
