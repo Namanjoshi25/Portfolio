@@ -61,3 +61,13 @@ export function monthLabels(weeks: ContributionWeek[]): (string | null)[] {
 export function isDesktopOnlyWeek(i: number, total: number): boolean {
   return i < total - 26
 }
+
+// Level 0 -> muted; 1-4 -> primary at rising opacity. Avoid the `bg-primary` class: the
+// newspaper theme adds a box-shadow and uppercase styling to exactly `.bg-primary`.
+export const LEVEL_CLASSES: Record<ContributionLevel, string> = {
+  0: "bg-muted",
+  1: "bg-[hsl(var(--primary)/0.25)]",
+  2: "bg-[hsl(var(--primary)/0.5)]",
+  3: "bg-[hsl(var(--primary)/0.75)]",
+  4: "bg-[hsl(var(--primary))]",
+}
