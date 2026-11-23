@@ -1,4 +1,5 @@
 import { ActivityCell } from "@/components/activity-cell"
+import { ActivityGrid } from "@/components/activity-grid"
 import {
   LEVEL_CLASSES,
   formatTotal,
@@ -12,22 +13,32 @@ import { cn } from "@/lib/utils"
 const ROWS = [0, 1, 2, 3, 4, 5, 6]
 const LEVELS: ContributionLevel[] = [0, 1, 2, 3, 4]
 
-export function ActivitySection({ data }: { data: ContributionCalendar | null }) {
+// `className` carries page.tsx's SECTION_DIVIDER_CLASS so the divider can't drift from other sections.
+export function ActivitySection({
+  data,
+  className,
+}: {
+  data: ContributionCalendar | null
+  className?: string
+}) {
   if (!data) return null
 
   const labels = monthLabels(data.weeks)
+  const lastWeek = data.weeks.length - 1
+  // The most recent day is the grid's single Tab stop; it is always visible (R12 keeps recent weeks).
+  const lastDay = data.weeks[lastWeek]?.[data.weeks[lastWeek].length - 1]
 
   return (
-    <section id="activity" className="border-t border-border/40 pt-8">
+    <section id="activity" className={className}>
       <div className="flex min-h-0 flex-col gap-y-3">
         <div className="space-y-1">
           <h2 className="text-xl font-bold">Activity</h2>
           <p className="text-sm text-muted-foreground">
-            {formatTotal(data.total)} contributions in the last year
+            {`${formatTotal(data.total)} ${data.total === 1 ? "contribution" : "contributions"} in the last year`}
           </p>
         </div>
         <div className="rounded-2xl border border-border/50 bg-card/20 p-5">
-          <div className="flex gap-[3px]">
+          <ActivityGrid weekCount={data.weeks.length}>
             {data.weeks.map((week, i) => (
               <div
                 key={i}
@@ -42,14 +53,14 @@ export function ActivitySection({ data }: { data: ContributionCalendar | null })
                 {ROWS.map((weekday) => {
                   const day = week.find((d) => d.weekday === weekday)
                   return day ? (
-                    <ActivityCell key={weekday} day={day} />
+                    <ActivityCell key={weekday} day={day} week={i} tabbable={day === lastDay} />
                   ) : (
                     <div key={weekday} className="aspect-square w-full" />
                   )
                 })}
               </div>
             ))}
-          </div>
+          </ActivityGrid>
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
             <a
               href="https://github.com/Namanjoshi25"

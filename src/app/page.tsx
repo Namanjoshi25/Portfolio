@@ -260,7 +260,7 @@ export default async function Page() {
           ))}
         </div>
       </section>
-      <ActivitySection data={activity} />
+      <ActivitySection data={activity} className={SECTION_DIVIDER_CLASS} />
       <section id="projects" className={SECTION_DIVIDER_CLASS}>
         <ProjectsSection projects={DATA.projects} />
       </section>

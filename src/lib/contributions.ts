@@ -71,3 +71,32 @@ export const LEVEL_CLASSES: Record<ContributionLevel, string> = {
   3: "bg-[hsl(var(--primary)/0.75)]",
   4: "bg-[hsl(var(--primary))]",
 }
+
+export type CellPos = { week: number; row: number }
+
+const ARROW_STEPS: Record<string, [number, number]> = {
+  ArrowLeft: [-1, 0],
+  ArrowRight: [1, 0],
+  ArrowUp: [0, -1],
+  ArrowDown: [0, 1],
+}
+
+// Roving-focus target for an arrow key: steps from `from` until `exists(week, row)` is true
+// (skipping missing days of partial weeks and columns hidden below sm). Null at the edge or
+// for a non-arrow key.
+export function nextCell(
+  from: CellPos,
+  key: string,
+  weekCount: number,
+  exists: (week: number, row: number) => boolean
+): CellPos | null {
+  const step = ARROW_STEPS[key]
+  if (!step) return null
+  let { week, row } = from
+  for (;;) {
+    week += step[0]
+    row += step[1]
+    if (week < 0 || week >= weekCount || row < 0 || row > 6) return null
+    if (exists(week, row)) return { week, row }
+  }
+}

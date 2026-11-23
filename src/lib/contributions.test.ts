@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { formatTotal, isDesktopOnlyWeek, monthLabels, toLevel, tooltipText } from "./contributions"
+import { formatTotal, isDesktopOnlyWeek, monthLabels, nextCell, toLevel, tooltipText } from "./contributions"
 
 describe("toLevel", () => {
   it.each([
@@ -73,5 +73,34 @@ describe("isDesktopOnlyWeek", () => {
   it("hides nothing when total <= 26", () => {
     expect(isDesktopOnlyWeek(0, 26)).toBe(false)
     expect(isDesktopOnlyWeek(0, 10)).toBe(false)
+  })
+})
+
+describe("nextCell", () => {
+  const all = () => true
+  it("moves one step for each arrow key", () => {
+    const from = { week: 5, row: 3 }
+    expect(nextCell(from, "ArrowLeft", 53, all)).toEqual({ week: 4, row: 3 })
+    expect(nextCell(from, "ArrowRight", 53, all)).toEqual({ week: 6, row: 3 })
+    expect(nextCell(from, "ArrowUp", 53, all)).toEqual({ week: 5, row: 2 })
+    expect(nextCell(from, "ArrowDown", 53, all)).toEqual({ week: 5, row: 4 })
+  })
+  it("ignores non-arrow keys", () => {
+    expect(nextCell({ week: 5, row: 3 }, "Enter", 53, all)).toBeNull()
+  })
+  it("stops at the grid edges", () => {
+    expect(nextCell({ week: 0, row: 3 }, "ArrowLeft", 53, all)).toBeNull()
+    expect(nextCell({ week: 52, row: 3 }, "ArrowRight", 53, all)).toBeNull()
+    expect(nextCell({ week: 5, row: 0 }, "ArrowUp", 53, all)).toBeNull()
+    expect(nextCell({ week: 5, row: 6 }, "ArrowDown", 53, all)).toBeNull()
+  })
+  it("skips missing or hidden cells", () => {
+    // weeks 0-26 hidden (mobile); week 52 is a partial week ending on Wednesday (row 3)
+    const exists = (w: number, r: number) => w > 26 && !(w === 52 && r > 3)
+    expect(nextCell({ week: 27, row: 2 }, "ArrowLeft", 53, exists)).toBeNull()
+    expect(nextCell({ week: 51, row: 5 }, "ArrowRight", 53, exists)).toBeNull()
+    expect(nextCell({ week: 51, row: 2 }, "ArrowRight", 53, exists)).toEqual({ week: 52, row: 2 })
+    const gap = (w: number) => w !== 10
+    expect(nextCell({ week: 11, row: 0 }, "ArrowLeft", 53, gap)).toEqual({ week: 9, row: 0 })
   })
 })

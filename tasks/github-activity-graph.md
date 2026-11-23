@@ -53,10 +53,12 @@ Build:     `npm run build` (also typechecks, including test files)
 - [x] 5. Wire into `src/app/page.tsx`: make it async, add `export const revalidate = 86400`, fetch, and render `<ActivitySection>` directly before `#projects` — _covers: R1, R3, R4_ — run: `sonnet/medium`
   approach: imports `ActivitySection` and `fetchContributionCalendar`, makes `Page` async with `export const revalidate = 86400`, and inserts `<ActivitySection data={activity} />` directly above `<section id="projects"`; nothing else on the page changed. Run the build with no token (`env -u GITHUB_TOKEN`) and check that `/` is still `○` and the build passes.
   verify: `env -u GITHUB_TOKEN npm run build 2>&1 | grep -E '^[├┌└] ○ /\s'`
-- [ ] 6. Run /code-review on the full feature diff (fresh context) and fix any
+- [x] 6. Run /code-review on the full feature diff (fresh context) and fix any
   confirmed findings. Run only the tests of the files you change; the full suite
   runs in task 7. — run: `opus/high`
   eval: skip
+  approach: `/code-review high f8c554e..HEAD` reported 1 important + 7 nits. Fixed: (a) roving tabindex. The new `src/components/activity-grid.tsx` (`"use client"` wrapper around the week columns) makes the grid one Tab stop: the most recent day has `tabIndex=0` and the rest have -1. Arrow keys move focus via the pure `nextCell()` in `contributions.ts`, which skips missing days and columns hidden below sm. The focused cell becomes the Tab stop. Cells carry `data-cell="<week>-<weekday>"`. (b) The cell tooltip passes `CELL_TOOLTIP_CLASS` (`bg-[hsl(var(--primary))]`), so cn drops `bg-primary` and the newspaper theme no longer uppercases or shadows it. (c) A total of 1 renders `1 contribution`. (d) `ActivitySection` takes `className` and page.tsx passes `SECTION_DIVIDER_CLASS`. (e) Added `src/app/page.test.tsx`, which covers task 5's wiring: before #projects, omitted on null, `revalidate`. Deferred (see Notes): the ISR null-caching finding, the double screen-reader announcement, and the no-tooltip-on-touch finding. Checked in the dev server with Playwright: Tab lands on the newest cell, arrows move with tooltips showing, Tab leaves to the GitHub link, Left at 375px stops at the first visible column, and the newspaper tooltip has `text-transform:none` and `box-shadow:none`.
+  verify: `npx vitest run src/lib/contributions.test.ts src/components/activity-graph.test.tsx src/components/activity-cell.test.tsx src/app/page.test.tsx && npx tsc --noEmit`
 - [ ] 7. Verify every acceptance criterion in the spec: run the command /
   demonstrate the behavior for each one, and check them off in the spec file.
   Report any that fail instead of checking them. Visual checks: dev server plus Playwright in light, dark and newspaper themes and at 375px; needs `GITHUB_TOKEN` in `.env.local`, so report BLOCKED on those if it's missing. — run: `sonnet/medium`
@@ -72,3 +74,8 @@ Build:     `npm run build` (also typechecks, including test files)
 - With no token, the fetch is skipped entirely. `export const revalidate` on the page keeps ISR on in production either way.
 - Visual checks for the graph (themes, 390px) can't run until task 5 wires it into the page, and need `GITHUB_TOKEN`. They are covered by task 7.
 - Never log the token or put it in error messages.
+- **Deferred review finding (needs a spec decision):** R4's "return null on any failure" means one failed daily ISR revalidation (GitHub 5xx, rate limit, or a 200 with `errors`) renders the page without #activity, and that page is cached for 24h, replacing the good one. Fixing it means throwing at runtime so Next keeps the stale page, which contradicts R4 and task 3's tests. Left as specced.
+- Also deferred: Radix adds `aria-describedby` to the hidden tooltip copy, so screen readers read the cell text twice (needs a DOM test env to verify any fix). Touch taps don't open Radix tooltips; R11 only requires hover and focus.
+- Pre-existing, not from this feature: the dev console shows "Function components cannot be given refs" from `ModeToggle` inside the dock's Tooltip (`src/components/mode-toggle.tsx`). Task 7's "no errors in browser console" check will see it.
+- `vi.mock` in tests: use static imports plus `vi.hoisted` for mock fns. Top-level `await import()` fails `tsc` (TS1378, module target).
+- `ActivityGrid` changes `tabIndex` directly on the DOM in `onFocus`. React leaves it alone, because the cell's `tabIndex` prop value never changes between renders.

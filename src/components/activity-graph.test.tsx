@@ -15,10 +15,10 @@ function makeCalendar(weekCount: number, total = 1234): ContributionCalendar {
   return { total, weeks }
 }
 
-const render = (data: ContributionCalendar | null) =>
+const render = (data: ContributionCalendar | null, className?: string) =>
   renderToStaticMarkup(
     <TooltipProvider>
-      <ActivitySection data={data} />
+      <ActivitySection data={data} className={className} />
     </TooltipProvider>
   )
 
@@ -35,6 +35,26 @@ describe("ActivitySection", () => {
 
   it("formats the total with thousands separators", () => {
     expect(render(makeCalendar(53, 1234))).toContain("1,234 contributions in the last year")
+  })
+
+  it("uses the singular for a total of 1", () => {
+    expect(render(makeCalendar(53, 1))).toContain("1 contribution in the last year")
+  })
+
+  it("puts the className it is given (the page divider) on the section", () => {
+    expect(render(makeCalendar(2), "border-t pt-8")).toContain('<section id="activity" class="border-t pt-8">')
+  })
+
+  it("makes only the most recent day a Tab stop and tags every cell with its position", () => {
+    const cal = makeCalendar(53)
+    cal.weeks[52] = cal.weeks[52].filter((d) => d.weekday <= 3) // partial last week ends Wednesday
+    const html = render(cal)
+    const tabStops = html.match(/<button[^>]*tabindex="0"[^>]*>/g)
+    expect(tabStops).toHaveLength(1)
+    expect(tabStops![0]).toContain('data-cell="52-3"')
+    expect(html.match(/tabindex="-1"/g)).toHaveLength(cal.weeks.flat().length - 1)
+    expect(html).toContain('data-cell="0-0"')
+    expect(html).toContain('role="group"')
   })
 
   it("renders one focusable button per day with its tooltip text as label", () => {
