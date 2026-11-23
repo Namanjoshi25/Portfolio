@@ -124,9 +124,8 @@ export const DATA = {
       logoUrl: "",
       start: "Jun 2024",
       end: "Jul 2025",
-      badges: ["Shopify"],
-      description:
-        "Delivered 4 client e-commerce and web projects, including Shopify storefronts.",
+      badges: [],
+      description: "Delivered 4 client e-commerce and web projects.",
     },
   ],
   projects: [
