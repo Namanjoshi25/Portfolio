@@ -45,3 +45,19 @@ export function tooltipText(day: Pick<ContributionDay, "date" | "count">): strin
         : `${formatTotal(day.count)} contributions`
   return `${what} on ${date}`
 }
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+export function monthLabels(weeks: ContributionWeek[]): (string | null)[] {
+  let prev = -Infinity
+  return weeks.map((week, i) => {
+    const first = week.find((d) => d.date.endsWith("-01"))
+    if (!first || i - prev <= 2) return null
+    prev = i
+    return MONTHS[Number(first.date.slice(5, 7)) - 1]
+  })
+}
+
+export function isDesktopOnlyWeek(i: number, total: number): boolean {
+  return i < total - 26
+}

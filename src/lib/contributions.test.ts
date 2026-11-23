@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { formatTotal, toLevel, tooltipText } from "./contributions"
+import { formatTotal, isDesktopOnlyWeek, monthLabels, toLevel, tooltipText } from "./contributions"
 
 describe("toLevel", () => {
   it.each([
@@ -42,5 +42,36 @@ describe("tooltipText", () => {
       if (prev === undefined) delete process.env.TZ
       else process.env.TZ = prev
     }
+  })
+})
+
+const wk = (...dates: string[]) => dates.map((date) => ({ date, count: 0, level: 0 as const, weekday: 0 }))
+
+describe("monthLabels", () => {
+  it("labels a week containing the 1st mid-week", () => {
+    const weeks = [wk("2026-01-28", "2026-01-29"), wk("2026-01-30", "2026-01-31", "2026-02-01"), wk("2026-02-04")]
+    expect(monthLabels(weeks)).toEqual([null, "Feb", null])
+  })
+  it("labels the partial first week if it holds a 1st", () => {
+    expect(monthLabels([wk("2026-03-01", "2026-03-02"), wk("2026-03-08")])).toEqual(["Mar", null])
+  })
+  it("skips a label within 2 columns of the previous one", () => {
+    const weeks = [wk("2026-01-01"), wk("2026-01-08"), wk("2026-02-01"), wk("2026-02-08"), wk("2026-03-01")]
+    expect(monthLabels(weeks)).toEqual(["Jan", null, null, null, "Mar"])
+  })
+  it("keeps labels 3 columns apart", () => {
+    const weeks = [wk("2026-01-01"), wk("2026-01-08"), wk("2026-01-15"), wk("2026-02-01")]
+    expect(monthLabels(weeks)).toEqual(["Jan", null, null, "Feb"])
+  })
+})
+
+describe("isDesktopOnlyWeek", () => {
+  it("hides the first 27 of 53 weeks on mobile", () => {
+    expect(isDesktopOnlyWeek(26, 53)).toBe(true)
+    expect(isDesktopOnlyWeek(27, 53)).toBe(false)
+  })
+  it("hides nothing when total <= 26", () => {
+    expect(isDesktopOnlyWeek(0, 26)).toBe(false)
+    expect(isDesktopOnlyWeek(0, 10)).toBe(false)
   })
 })
