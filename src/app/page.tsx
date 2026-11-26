@@ -5,6 +5,8 @@ import { ProjectCard } from "@/components/project-card";
 import { RotatingText } from "@/components/rotating-text";
 import { ResumeCard } from "@/components/resume-card";
 import { ProjectsSection } from "@/components/projects-section";
+import { ActivitySection } from "@/components/activity-graph";
+import { fetchContributionCalendar } from "@/lib/github";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
@@ -17,35 +19,36 @@ import Markdown from "react-markdown";
 const BLUR_FADE_DELAY = 0.04;
 const SECTION_DIVIDER_CLASS = "border-t border-border/40 pt-8";
 const SKILL_ICONS: Record<string, string> = {
+  // One entry per DATA.skills name; a missing key falls back to the GitHub icon.
+  Python: "https://skillicons.dev/icons?i=python",
   TypeScript: "https://skillicons.dev/icons?i=ts",
+  FastAPI: "https://skillicons.dev/icons?i=fastapi",
+  SQLAlchemy: "https://cdn.simpleicons.org/sqlalchemy/D71F00",
+  PostgreSQL: "https://skillicons.dev/icons?i=postgres",
+  MySQL: "https://skillicons.dev/icons?i=mysql",
+  MongoDB: "https://skillicons.dev/icons?i=mongodb",
+  "Redis / RQ": "https://skillicons.dev/icons?i=redis",
+  // OpenAI, Langfuse and Playwright aren't on skillicons or simpleicons.
+  "OpenAI API": "https://unpkg.com/@lobehub/icons-static-svg@1.106.0/icons/openai.svg",
+  "Anthropic API": "https://cdn.simpleicons.org/anthropic/D97757",
+  "Tool-calling Agents": "https://cdn.simpleicons.org/langchain/1C3C3C",
+  "RAG (pgvector)": "https://skillicons.dev/icons?i=postgres",
+  "LLM-as-judge Evals": "https://unpkg.com/@lobehub/icons-static-svg@1.106.0/icons/langfuse.svg",
+  "AWS (ECS, SQS, SES)": "https://skillicons.dev/icons?i=aws",
+  "GCP (Cloud Run)": "https://skillicons.dev/icons?i=gcp",
+  Docker: "https://skillicons.dev/icons?i=docker",
+  "GitHub Actions": "https://cdn.simpleicons.org/githubactions/2088FF",
   "Next.js": "https://skillicons.dev/icons?i=nextjs",
   React: "https://skillicons.dev/icons?i=react",
-  "Node.js": "https://skillicons.dev/icons?i=nodejs",
-  JavaScript: "https://skillicons.dev/icons?i=js",
-  TailwindCSS: "https://skillicons.dev/icons?i=tailwind",
-  PostgreSQL: "https://skillicons.dev/icons?i=postgres",
-  MongoDB: "https://skillicons.dev/icons?i=mongodb",
-  Prisma: "https://skillicons.dev/icons?i=prisma",
-  Python: "https://skillicons.dev/icons?i=python",
-  FastAPI: "https://skillicons.dev/icons?i=fastapi",
-  Celery: "https://cdn.simpleicons.org/celery/37814A",
-  Redis: "https://skillicons.dev/icons?i=redis",
-  "Agentic Workflows": "https://cdn.simpleicons.org/langchain/1C3C3C",
-  "RAG Pipelines": "https://cdn.simpleicons.org/langchain/1C3C3C",
-  "LLM Integration": "https://cdn.simpleicons.org/anthropic/D97757",
-  "AWS (EC2)": "https://skillicons.dev/icons?i=aws",
-  Docker: "https://skillicons.dev/icons?i=docker",
-  "CI/CD": "https://cdn.simpleicons.org/githubactions/2088FF",
-  GCP: "https://skillicons.dev/icons?i=gcp",
-  Stripe: "https://cdn.simpleicons.org/stripe/635BFF",
-  MySQL: "https://skillicons.dev/icons?i=mysql",
-  SQLAlchemy: "https://cdn.simpleicons.org/sqlalchemy/D71F00",
-  "Headless WordPress": "https://skillicons.dev/icons?i=wordpress",
-  "REST APIs": "https://cdn.simpleicons.org/fastapi/009688",
-  "OAuth/Auth Implementation": "https://cdn.simpleicons.org/auth0/EB5424",
+  pytest: "https://cdn.simpleicons.org/pytest/0A9EDC",
+  Vitest: "https://skillicons.dev/icons?i=vitest",
+  Playwright: "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/playwright/playwright-original.svg",
 };
 
-export default function Page() {
+export const revalidate = 86400;
+
+export default async function Page() {
+  const activity = await fetchContributionCalendar();
   return (
     <main className="flex min-h-[100dvh] flex-col space-y-10">
       <section id="hero">
@@ -67,21 +70,21 @@ export default function Page() {
                   intervalMs={3000}
                   items={[
                     `${DATA.experience[0].title} @ ${DATA.experience[0].company}`,
-                    "Fullstack AI Developer @ AISolv",
-                    "Building AI solutions for businesses",
-                    "Automating manual processes",
+                    "Building LLM agents and evals",
+                    "Production FastAPI backends",
+                    "Shipping client products end to end",
                   ]}
                   className="text-base mb-4 text-muted-foreground"
                 />
               </div>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "Fullstack Developer",
-                  "AI Automation",
-                  "RAG & LLM Pipelines",
-                  "FastAPI · Next.js",
+                  "Software Engineer",
+                  "LLM Agents & Evals",
+                  "FastAPI · PostgreSQL",
+                  "Next.js · React",
                   "AWS · GCP",
-                  "n8n · Claude",
+                  "pytest · Playwright",
                 ].map((item) => (
                   <Badge key={item} variant="secondary" className="rounded-full px-2.5 py-1 text-xs">
                     {item}
@@ -208,14 +211,14 @@ export default function Page() {
           <div className="space-y-2">
             <h2 className="text-xl font-bold">About</h2>
             <p className="text-sm text-muted-foreground">
-              Building scalable products that combine strong engineering with practical AI automation.
+              Production backends, LLM features and the tests that keep them working.
             </p>
           </div>
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 4}>
           <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card/30 p-5 shadow-sm backdrop-blur-sm md:p-6">
             <div className="mb-4 flex flex-wrap gap-2">
-              {["AI Agentic Workflows", "Full-Stack Architecture", "Data Engineering"].map((pill) => (
+              {["Production Backends", "LLM Agents & Evals", "Testing"].map((pill) => (
                 <Badge
                   key={pill}
                   variant="secondary"
@@ -255,6 +258,7 @@ export default function Page() {
           ))}
         </div>
       </section>
+      <ActivitySection data={activity} className={SECTION_DIVIDER_CLASS} />
       <section id="projects" className={SECTION_DIVIDER_CLASS}>
         <ProjectsSection projects={DATA.projects} />
       </section>

@@ -50,13 +50,16 @@ export const ResumeCard = ({
           <BorderBeam size={120} duration={16} />
         </div>
         <div className="flex-none">
-          <Avatar className="border size-12 m-auto bg-muted-background dark:bg-foreground">
+          {/* One background and one clipped edge: a second rounded layer inside left a jagged halo. */}
+          <Avatar className="border size-12 m-auto bg-muted">
             <AvatarImage
               src={logoUrl}
               alt={altText}
-              className="object-contain"
+              className="object-contain bg-background dark:bg-foreground"
             />
-            <AvatarFallback>{altText[0]}</AvatarFallback>
+            <AvatarFallback className="rounded-none bg-transparent text-sm font-semibold text-muted-foreground">
+              {altText[0]}
+            </AvatarFallback>
           </Avatar>
         </div>
         <div className="flex-grow ml-4 items-center flex-col group">
